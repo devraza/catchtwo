@@ -1,6 +1,8 @@
-import discum, re, time, multiprocessing, json, datetime, random
+import discum, re, time, multiprocessing, json, datetime, random, flask
 
 version = 'v2.6'
+import keep_alive
+keep_alive.keep_alive()
 
 with open('data/config.json','r') as file:
     info = json.loads(file.read())
@@ -36,10 +38,14 @@ def solve(message):
     solution = re.findall('^'+hint_replaced+'$', pokemon_list, re.MULTILINE)
     return solution
 
+
 def spam():
-    while True:
-        bot.sendMessage(channel_id, 'spawning')
-        time.sleep(2)
+  while True:
+    num = random.randint(1,10000000000000000000000000)
+    bot.sendMessage(channel_id,num)
+    intervals = [1,1.1, 1.2, 1.3, 1.4]
+    time.sleep(random.choice(intervals))
+            
 
 def start_spam():
     new_process = multiprocessing.Process(target=spam)
